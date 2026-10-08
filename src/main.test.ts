@@ -1,0 +1,14 @@
+import { type ExecFileSyncOptions, execFileSync } from "node:child_process";
+import { join } from "node:path";
+import { env, execPath } from "node:process";
+
+// shows how the runner will run a javascript action with env / stdout protocol
+test.skip("runs", () => {
+  env["INPUT_GROOVY-VERSION"] = "4.0.9";
+  const np = execPath;
+  const ip = join(__dirname, "..", "lib", "src", "main.js");
+  const options: ExecFileSyncOptions = {
+    env,
+  };
+  console.log(execFileSync(np, [ip], options).toString());
+});
